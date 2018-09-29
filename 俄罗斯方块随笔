@@ -1,0 +1,533 @@
+这个文本是我在写demo的时候随做随写的，没有条理性
+很多在前面写的构思都在后面被推翻了
+
+
+1、5种随机方块
+	定义对象存储点阵图的方位
+2、随中心旋转
+	可以使用点阵图？10*15
+3、移动停止判定
+	3.1 分为左右移动和上下移动2种情况，用键值判定
+
+4、同行铺满清除
+	所有的x为1时清除，使一个数组的1为0
+var data =
+[
+	[
+		[0],[0],[0],[0],[1],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[1],[1],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[1],[0],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		],
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		],
+
+	[
+		[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]
+		]
+]
+
+向下改变arr1，使其+1
+向左改变arr2,使其值-1
+向右改变arr2,使其值+1
+
+   *
+ * * 
+ * 
+
+* *
+  * *
+
+ 0:[
+	 [
+	 	{'arr1':x+0,'arr2':y+5},
+	 	{'arr1':x+1,'arr2':y+4},
+	 	{'arr1':x+1,'arr2':y+5},
+	 	{'arr1':x+2,'arr2':y+4}
+	 ],
+	 [
+	 	{'arr1':x+0,'arr2':y+4},
+	 	{'arr1':x+0,'arr2':y+5},
+	 	{'arr1':x+1,'arr2':y+5},
+	 	{'arr1':x+1,'arr2':y+6}
+	 ]
+ ]
+
+
+
+ *
+ *
+ *
+ *
+ *
+
+* * * * *
+
+ 1:[
+ 	[
+	 	{'arr1':0,'arr2':5},
+	 	{'arr1':1,'arr2':5},
+	 	{'arr1':2,'arr2':5},
+	 	{'arr1':3,'arr2':5},
+	 	{'arr1':4,'arr2':5},
+	 	{'arr1':5,'arr2':5}
+ 	],
+ 	[
+ 		{'arr1':2,'arr2':3},
+ 		{'arr1':2,'arr2':4},
+ 		{'arr1':2,'arr2':5},
+ 		{'arr1':2,'arr2':6},
+ 		{'arr1':2,'arr2':7}
+
+ 	]
+ ]
+
+     *
+     *
+     *
+   * *
+
+ * * * *
+       *
+
+ *
+ * * * *
+ 2:[
+	[
+	 	{'arr1':0,'arr2':5},
+	 	{'arr1':1,'arr2':5},
+	 	{'arr1':2,'arr2':5},
+	 	{'arr1':3,'arr2':5},
+	 	{'arr1':3,'arr2':4}
+	],
+	[
+		{'arr1':0,'arr2':3},
+		{'arr1':0,'arr2':4},
+		{'arr1':0,'arr2':5},
+		{'arr1':0,'arr2':6},
+		{'arr1':1,'arr2':6}
+	],
+	[
+		{'arr1':0,'arr2':3},
+		{'arr1':1,'arr2':3},
+		{'arr1':1,'arr2':4},
+		{'arr1':1,'arr2':5},
+		{'arr1':1,'arr2':6}
+	]
+ ]
+
+
+  * *
+  * *
+  3:[
+  	{'arr1':0,'arr2':4},
+  	{'arr1':1,'arr2':4},
+  	{'arr1':0,'arr2':5},
+  	{'arr1':1,'arr2':5}
+  ]
+
+
+	*
+	* *
+	*
+
+  * * *
+    *
+
+    *
+  * *
+    *
+
+    *
+  * * *
+
+ 4:[
+  	[
+	  	{'arr1':0,'arr2':4},
+	  	{'arr1':1,'arr2':4},
+	  	{'arr1':1,'arr2':5},
+	  	{'arr1':2,'arr2':4}
+	],
+	[
+		{'arr1':1,'arr2':3},
+		{'arr1':1,'arr2':4},
+		{'arr1':1,'arr2':5},
+		{'arr1':2,'arr2':4}
+	],
+	[
+		{'arr1':0,'arr2':4},
+		{'arr1':1,'arr2':4},
+		{'arr1':1,'arr2':3},
+		{'arr1':2,'arr2':4}
+	],
+	[
+		{'arr1':0,'arr2':4},
+		{'arr1':1,'arr2':3},
+		{'arr1':1,'arr2':4},
+		{'arr1':1,'arr2':5}
+	]
+  ]
+
+
+  *
+  *
+  *
+  * *
+
+* * * *
+*
+
+      *
+* * * *
+5:[
+    [
+		{'arr1':0,'arr2':5},
+		{'arr1':1,'arr2':5},
+		{'arr1':2,'arr2':5},
+		{'arr1':3,'arr2':5},
+		{'arr1':3,'arr2':6}
+
+	],
+	[
+		{'arr1':0,'arr2':4},
+		{'arr1':0,'arr2':5},
+		{'arr1':0,'arr2':6},
+		{'arr1':0,'arr2':7},
+		{'arr1':1,'arr2':4}
+	],
+	[
+		{'arr1':1,'arr2':4},
+		{'arr1':1,'arr2':5},
+		{'arr1':1,'arr2':6},
+		{'arr1':1,'arr2':7},
+		{'arr1':0,'arr2':7}
+
+	] 
+]
+
+所有的事件都要放到一个计时器中
+这个计时器中应该包括以下几个方法
+	1、随机生成方块    
+	2、让现在的方块下降   现在的想法是x++
+	3、键盘按下的事件，变换格子
+	5、判断是否到达底部
+	6、是否应该清线，如果清线上面的格子要下降清除的线的距离
+	4、积分
+
+
+2018/08/31
+经过很多天后再重新来填坑，发现一种相对于之前的更简单的方法
+可以将方块抽象为对象，包含2个对象属性x,y; x 和而对应的y共同组成一个点 如x[0]y[0]
+x=[]
+那么下落时只要将y数组中所有的值+1，判断是否停止时
+
+
+   *                      //   x=[0,1,1,2]
+ * *                      //   y=[5,4,5,4]
+ *                        //
+
+
+
+2018/9/1
+要实现停止的判定
+格子的相同r的值下的最大b值的+1 ==1
+
+r值相等，b值大替换 ，r值不等添加
+var arr=[];
+var style =1;
+var square =i;
+arr.push([square[style].b[0],square[style].r[0]]);
+for (var n=0;n<square[style].r.length;n++){
+	for(var m=0;m<arr.length;m++){
+		if(square[style].r[n]==arr[m][1]){
+			if(square[style].b[n]>=arr[m][0]){
+				arr[m][0]=square[style].b[n];
+			}
+			break
+		}
+
+		if(m>=arr.length-1){
+			arr.push([square[style].b[n],square[style].r[n]]);
+		}
+	}
+}
+console.log(arr);
+
+
+好的现在已经实现了
+1、随机生成方块
+2、方块按时下落
+3、判定方块是否停止
+
+
+然后把用户的键盘摔坏我就写完了 ，哈哈哈
+
+
+
+好的，现在还差
+1、键盘绑定事件，控制方块的移动和装换形态
+ <-- :37;
+
+ ^
+ | :38;
+
+ -->:39;
+
+键盘事件还要判断其左右和右边是否已经有方块了
+如果是变形 还要判断 变形后的方块 上下左右是否有方块
+好复杂
+将上面写好的判断是否触摸下方方块的那些代码打包成函数
+
+function tauchdown(square,style){
+	var isstoparr=[]
+	isstoparr.push([square[style].b[0]+x,square[style].r[0]+y]);
+	for (var n=0;n<square[style].r.length;n++){
+		for(var m=0;m<isstoparr.length;m++){
+			if(square[style].r[n]+y==isstoparr[m][1]){
+				if(square[style].b[n]+x>=isstoparr[m][0]){
+					isstoparr[m][0]=square[style].b[n]+x;
+				}
+				break;
+			}
+			if(m>=isstoparr.length-1){
+				isstoparr.push([square[style].b[n]+x,square[style].r[n]+y]);
+			}
+		}
+	}
+
+	// 判断是否触到了之前的方格
+	for(var n =0;n<isstoparr.length;n++){
+		if(data[isstoparr[n][0]+1][isstoparr[n][1]]==1){
+			return true;
+		}
+	}
+}
+
+function tauchleft(square,style){
+	var isstoparr=[]
+	isstoparr.push([square[style].b[0]+x,square[style].r[0]+y]);
+	for (var n=0;n<square[style].b.length;n++){
+		for(var m=0;m<isstoparr.length;m++){
+			if(square[style].b[n]+x==isstoparr[m][0]){
+
+				
+				if(square[style].r[n]+y<=isstoparr[m][1]){
+					isstoparr[m][1]=square[style].r[n]+y;
+				}
+				break;
+			}
+			if(m>=isstoparr.length-1){
+				isstoparr.push([square[style].b[n]+x,square[style].r[n]+y]);
+			}
+		}
+	}
+	for(var n = 0;n<isstoparr.length;n++){
+		if(isstoparr[n][1]==0){
+			return true;
+		}
+	}
+	// 判断是否触到了之前的方格
+	for(var n =0;n<isstoparr.length;n++){
+		if(data[isstoparr[n][0]][isstoparr[n][1]-1]==1){
+			return true;
+		}
+	}
+}
+
+function tauchright(square,style){
+	var isstoparr=[]
+	isstoparr.push([square[style].b[0]+x,square[style].r[0]+y]);
+	for (var n=0;n<square[style].b.length;n++){
+		for(var m=0;m<isstoparr.length;m++){
+			if(square[style].b[n]+x==isstoparr[m][0]){
+
+				
+				if(square[style].r[n]+y>=isstoparr[m][1]){
+					isstoparr[m][1]=square[style].r[n]+y;
+				}
+				break;
+			}
+			if(m>=isstoparr.length-1){
+				isstoparr.push([square[style].b[n]+x,square[style].r[n]+y]);
+			}
+		}
+	}
+	for(var n = 0;n<isstoparr.length;n++){
+		if(isstoparr[n][1]==9){
+			return true;
+		}
+	}
+
+
+	// 判断是否触到了之前的方格
+	for(var n =0;n<isstoparr.length;n++){
+		if(data[isstoparr[n][0]][isstoparr[n][1]+1]==1){
+			return true;
+		}
+	}
+}
+
+document.onkeydown = function(e){
+	switch (e.keyCode){
+		case 37:
+			if(!tauchleft(square,style)){
+				y--;
+			}
+		break;
+		case 38:
+		console.log(1)
+			style++;
+			if(style==square.length){
+				style=0
+			}
+		break;
+		case 39:
+			if(!tauchright(square,style)){
+				y++;
+			}
+		break;
+	}
+}
+
+上面的代码在变形时的判定没有写
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 2、实现清行
+
+ 首先要将data中的相关数据清除
+
+
+for(var q =0;q<data.length;q++){
+ 	for (var p=0;p<data[q].length;p++){
+ 		if(data[q][p]==0){
+ 			break;
+ 		}
+ 		if(p>=data[q].length-1){
+ 			data.splice(q,1);
+ 			data.unshift([[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]]);
+ 		}
+ 	}
+}
+
+
+ 9/02
+
+
+ 项目进度80%
+现在的问题是解决按   ^
+				  	 |   时的行为
+
+
+
+
+试玩阶段发现少了2个方块
+
+ * *			'b' : [0,0,1,2,3],
+ *				'r' : [4,5,4,4,4]
+ *
+ *
+
+
+
+ * *			'b'	: [0,0,1,2,3],
+   *			'r' : [4,5,5,5,5]
+   *
+   *
+
+清行的实现我觉得很赞
+还有game over 和 38键盘事件 没写
+game over 是当方块的下落停止时，生成新方块的位置是否已经有了1
+于是可以在 tryone的新生成方块的那几行代码中加
+
+for(var n = 0;n<square[style].b.length;n++){
+	data[square[style].b[n]+x][square[style].r[n]+y]=1;
+}
+
+render();
+
+// 画完
+
+追加代码后
+
+for(var n = 0;n<square[style].b.length;n++){
+	if(data[square[style].b[n]+x][square[style].r[n]+y]==1){
+		clearInterval(time);
+		gameover = true;
+		alert('胜败乃兵家常事，大侠请重头再来');
+		break;
+	}
+	data[square[style].b[n]+x][square[style].r[n]+y]=1;
+}
+if(gameover){
+	return;
+}
+render()
+// 画完
+
+ok到此为止只剩下38键盘事件了！
+38事件：
+判定
+	变形后的方块不占用已有方块的位置
+	变形后的方块不超出游戏空间(左右)
+就是遍历嘛 easy
+
+for(var n = 0;n<square[style].b.length;n++){
+	if(data[square[style].b[n]+x][square[style].r[n]+y]==1||square[style].r[n]+y<0||square[style].r[n]+y>9){
+		style--;
+		if(style<0){
+			style =square.length-1;
+		}
+		break;
+	}
+}
+好的。解决了;
+完美！
+
+从8/20号开始  至9/2号结束
+中间经历小组项目评比耽误了一些时间，总体进度还是可以的
